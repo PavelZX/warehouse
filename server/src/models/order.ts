@@ -1,5 +1,6 @@
 import { sequelize } from './index'
 import { User } from './user'
+import { Good } from './good'
 import { DataTypes, Model, Optional } from 'sequelize'
 
 interface OrderAttributes {
@@ -59,5 +60,15 @@ Order.init(
 		modelName: 'Order',
 	}
 )
+
+Order.hasMany(Good, {
+	foreignKey: 'orderId',
+	as: "goods",
+})
+
+Good.belongsTo(Order, {
+	foreignKey: 'orderId',
+	as: 'order'
+})
 
 export { Order, OrderAttributes, OrderCreationAttributes }
