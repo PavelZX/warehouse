@@ -1,0 +1,81 @@
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: sticky;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 4rem;
+	padding: 0 2rem;
+	background-color: var(--color-primary-500);
+	color: var(--color-neutral-100);
+	box-shadow: 0 5px 8px rgba(0, 0, 0, 0.5);
+}
+
+.header h1 {
+	line-height: 1;
+}
+
+.header > .navbar {
+	font-weight: bold;
+	font-size: 1.1rem;
+}
+
+.navbar > :not(:last-child) {
+	margin-right: 2rem;
+}
+
+.navbar > a,
+.dropDown a {
+	position: relative;
+}
+
+.navbar > a:hover::before,
+.navbar > a.active::before,
+.dropDown a.active::before,
+.dropDown a:hover::before {
+	transform: scaleX(1);
+}
+
+.navbar > a::before,
+.dropDown a::before {
+	content: '';
+	border-radius: 99px;
+	cursor: pointer;
+	position: absolute;
+	width: 100%;
+	bottom: -6px;
+	background: var(--color-neutral-100);
+	height: 4px;
+	margin: 0 auto;
+	transform: scaleX(0);
+	transition: transform var(--duration) var(--timing-fn);
+}
+
+.dropDown {
+	font-size: 1.25rem;
+	display: flex;
+	align-items: center;
+	position: relative;
+}
+
+.dropDown button {
+	font-size: inherit;
+	color: var(--color-neutral-100);
+	background: transparent;
+	border: none;
+}
+
+.dropDownMenu {
+	position: fixed;
+	right: 1.5rem;
+	list-style: none;
+	top: 4rem;
+	background-color: var(--color-neutral-450);
+	padding: 0 1.25rem;
+}
+
+.dropDownMenu li {
+	margin-block: 1.15rem;
+}
