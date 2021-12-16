@@ -13,7 +13,7 @@ import InvalidCredentialsError from '../Errors/InvalidCredentialsError'
 
 const router = Router()
 
-router.post('/me', isAuth, async (req: Request, res: Response) => {
+router.article('/me', isAuth, async (req: Request, res: Response) => {
 	try {
 		const { userId } = req.body
 		const user = await UserController.findById(userId)
@@ -24,7 +24,7 @@ router.post('/me', isAuth, async (req: Request, res: Response) => {
 	}
 })
 
-router.post(
+router.article(
 	'/register',
 	async (req: Request, res: Response, next: NextFunction) => {
 		try {
@@ -37,7 +37,7 @@ router.post(
 	}
 )
 
-router.post(
+router.article(
 	'/login',
 	async (req: Request, res: Response, next: NextFunction) => {
 		try {
@@ -74,7 +74,7 @@ router.patch(
 	}
 )
 
-router.post(
+router.article(
 	'/refresh',
 	async (req: Request, res: Response, next: NextFunction) => {
 		try {
@@ -96,7 +96,7 @@ router.post(
 	}
 )
 
-router.post(
+router.article(
 	'/logout',
 	isAuth,
 	(req: Request, res: Response, next: NextFunction) => {

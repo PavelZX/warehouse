@@ -9,7 +9,7 @@ interface FormData {
 	title: string
 	text: string
 }
-const CreatePost = () => {
+const CreateArticle = () => {
 	const { currentUser, fetchUser, fetchingUser } = useAuth()
 	const [values, handleChange] = useForm<FormData>({
 		title: '',
@@ -21,13 +21,13 @@ const CreatePost = () => {
 	if (!currentUser && !fetchingUser) return <Redirect to="/login" />
 	if (formSent) window.location.href = '/'
 
-	const postSubmit: FormEventHandler<HTMLFormElement> = async e => {
+	const articleSubmit: FormEventHandler<HTMLFormElement> = async e => {
 		e.preventDefault()
 
 		try {
 			await sendRequest({
 				method: 'POST',
-				path: '/posts',
+				path: '/articles',
 				auth: true,
 				body: values,
 			})
@@ -39,13 +39,13 @@ const CreatePost = () => {
 	}
 
 	return (
-		<Form onSubmit={postSubmit}>
+		<Form onSubmit={articleSubmit}>
 			<Input
 				type="text"
 				name="title"
 				onChange={handleChange}
 				value={values.title}
-				label="Post title"
+				label="Article title"
 			/>
 			<Textarea
 				name="text"
@@ -53,9 +53,9 @@ const CreatePost = () => {
 				onChange={handleChange}
 				label="Text"
 			/>
-			<Button text="Create Post" type="submit" />
+			<Button text="Create Article" type="submit" />
 		</Form>
 	)
 }
 
-export default CreatePost
+export default CreateArticle

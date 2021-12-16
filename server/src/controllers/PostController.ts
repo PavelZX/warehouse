@@ -1,35 +1,35 @@
 import { Op } from 'sequelize'
-import { Post, User } from '../models'
+import { Article, User } from '../models'
 
-export class PostController {
-	static async getPosts(lastPostDate: any = new Date(), limit = 10) {
+export class ArticleController {
+	static async getArticles(lastArticleDate: any = new Date(), limit = 10) {
 		try {
 			const limitPlusOne = limit + 1
 
-			const posts = await Post.findAll({
+			const articles = await Article.findAll({
 				order: [['createdAt', 'DESC']],
 				include: [{ model: User, as: 'owner', attributes: ['id', 'username'] }],
 				limit: limitPlusOne,
 				where: {
-					createdAt: { [Op.lt]: lastPostDate },
+					createdAt: { [Op.lt]: lastArticleDate },
 				} as any,
 			})
 
 			return {
-				posts: posts.slice(0, limit).map(post => {
-					const snippet = post.text.substring(0, 50).trim()
-					const elipsis = post.text.trim().length > 50 ? '...' : ''
-					post.text = `${snippet}${elipsis}`
-					return post
+				articles: articles.slice(0, limit).map(article => {
+					const snippet = article.text.substring(0, 50).trim()
+					const elipsis = article.text.trim().length > 50 ? '...' : ''
+					article.text = `${snippet}${elipsis}`
+					return article
 				}),
-				hasMore: posts.length === limitPlusOne,
+				hasMore: articles.length === limitPlusOne,
 			}
 		} catch (error) {
 			return []
 		}
 	}
 
-	static async addPost({
+	static async addArticle({
 		ownerId,
 		title,
 		text,
@@ -39,15 +39,15 @@ export class PostController {
 		text: string
 	}) {
 		try {
-			const post = await Post.create({
+			const article = await Article.create({
 				title,
 				text,
 				ownerId,
 				points: 0,
 			})
 
-			await post.save()
-			return post
+			await article.save()
+			return article
 		} catch (error) {
 			throw error
 		}

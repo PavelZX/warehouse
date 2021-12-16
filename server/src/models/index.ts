@@ -9,31 +9,31 @@ const sequelize = config.use_env_variable
 
 export { sequelize }
 
-import { Post } from './post'
+import { Article } from './article'
 import { Order } from './order'
 import { Good } from './good'
 import { Updoot } from './updoot'
 import { User } from './user'
 
-User.hasMany(Post, {
+User.hasMany(Article, {
 	sourceKey: 'id',
 	foreignKey: { allowNull: false, name: 'ownerId' },
-	as: 'posts',
+	as: 'articles',
 	onDelete: 'CASCADE',
 })
-User.belongsToMany(Post, {
+User.belongsToMany(Article, {
 	through: Updoot,
 	foreignKey: { allowNull: false, name: 'userId' },
 	onDelete: 'CASCADE',
 })
 
-Post.belongsTo(User, {
+Article.belongsTo(User, {
 	foreignKey: { name: 'ownerId' },
 	as: 'owner',
 })
-Post.belongsToMany(User, {
+Article.belongsToMany(User, {
 	through: Updoot,
-	foreignKey: { allowNull: false, name: 'postId' },
+	foreignKey: { allowNull: false, name: 'articleId' },
 	onDelete: 'CASCADE',
 })
 
@@ -47,4 +47,4 @@ Good.belongsTo(Order, {
 	as: 'order'
 })
 
-export { Post, Good, Order, User, Updoot, Sequelize }
+export { Article, Good, Order, User, Updoot, Sequelize }

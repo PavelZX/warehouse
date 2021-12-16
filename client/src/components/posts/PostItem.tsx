@@ -1,16 +1,16 @@
 import { faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Post } from '../../interfaces/postInterface'
+import { Article } from '../../interfaces/articleInterface'
 import { useAuth } from '../../utils/UserContext'
-import classes from '../../css/PostList.module.css'
+import classes from '../../css/ArticleList.module.css'
 
-interface PostItemProps {
-	post: Post
+interface ArticleItemProps {
+	article: Article
 }
 
-const PostItem = ({
-	post: { createdAt, title, text, points, owner },
-}: PostItemProps) => {
+const ArticleItem = ({
+	article: { createdAt, title, text, points, owner },
+}: ArticleItemProps) => {
 	const { currentUser } = useAuth()
 
 	const time = new Date(createdAt).toLocaleString('ru-RU', {
@@ -19,19 +19,19 @@ const PostItem = ({
 	})
 
 	return (
-		<section className={classes.postCard}>
-			<div className={classes.postHeader}>
+		<section className={classes.articleCard}>
+			<div className={classes.articleHeader}>
 				<small>
 					{owner.username} - {time}
 				</small>
 			</div>
 
-			<div className={classes.postBody}>
+			<div className={classes.articleBody}>
 				<h4>{title}</h4>
 				<p>{text.length > 100 ? `${text.substring(0, 100)}...` : text}</p>
 			</div>
 
-			<div className={classes.postButtons}>
+			<div className={classes.articleButtons}>
 				<button disabled={!currentUser}>
 					<FontAwesomeIcon
 						icon={faThumbsUp}
@@ -50,4 +50,4 @@ const PostItem = ({
 	)
 }
 
-export default PostItem
+export default ArticleItem

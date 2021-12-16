@@ -2,13 +2,13 @@ import './App.css'
 import { AuthProvider } from './utils/UserContext'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import {
-	CreatePost,
+	CreateArticle,
 	CreateGood,
 	CreateOrder,
 	Header,
 	Login,
 	Logout,
-	PostList,
+	ArticleList,
 	GoodList,
 	OrderList,
 	Signup,
@@ -20,13 +20,13 @@ function App() {
 			<Router>
 				<Header />
 				<Switch>
-					<Route path="/" exact component={PostList} />
+					<Route path="/" exact component={ArticleList} />
 					<Route path="/login" component={Login} />
 					<Route path="/signup" component={Signup} />
 					<Route path="/logout" component={Logout} />
 					<Route path="/goods" exact component={GoodList} />
 					<Route path="/orders" exact component={OrderList} />
-					<Route path="/create-post" component={CreatePost} />
+					<Route path="/create-article" component={CreateArticle} />
 					<Route path="/create-good" component={CreateGood} />
 					<Route path="/create-order" component={CreateOrder} />
 				</Switch>

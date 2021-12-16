@@ -2,7 +2,7 @@ import { sequelize } from './index'
 import { User } from './user'
 import { DataTypes, Model, Optional } from 'sequelize'
 
-interface PostAttributes {
+interface ArticleAttributes {
 	id: string
 	title: string
 	text: string
@@ -10,11 +10,11 @@ interface PostAttributes {
 	ownerId: string
 }
 
-interface PostCreationAttributes extends Optional<PostAttributes, 'id'> {}
+interface ArticleCreationAttributes extends Optional<ArticleAttributes, 'id'> {}
 
-class Post
-	extends Model<PostAttributes, PostCreationAttributes>
-	implements PostAttributes {
+class Article
+	extends Model<ArticleAttributes, ArticleCreationAttributes>
+	implements ArticleAttributes {
 	public id!: string
 	public title!: string
 	public text!: string
@@ -24,7 +24,7 @@ class Post
 	public readonly updatedAt!: Date
 }
 
-Post.init(
+Article.init(
 	{
 		id: {
 			type: DataTypes.UUID,
@@ -56,8 +56,8 @@ Post.init(
 	},
 	{
 		sequelize,
-		modelName: 'Post',
+		modelName: 'Article',
 	}
 )
 
-export { Post, PostAttributes, PostCreationAttributes }
+export { Article, ArticleAttributes, ArticleCreationAttributes }

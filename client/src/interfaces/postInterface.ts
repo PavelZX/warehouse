@@ -1,4 +1,4 @@
-export interface Post {
+export interface Article {
 	id: string
 	title: string
 	text: string
@@ -12,7 +12,7 @@ export interface Post {
 	}
 }
 
-export interface PostResponse {
-	posts: Post[]
+export interface ArticleResponse {
+	articles: Article[]
 	hasMore: boolean
 }

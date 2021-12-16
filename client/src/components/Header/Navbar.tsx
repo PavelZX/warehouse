@@ -15,9 +15,9 @@ const Navbar = ({ user, location }: NavbarProps) => {
 			{user != null ? (
 				<>
 					<Link
-						to="/create-post"
+						to="/create-article"
 						className={
-							location.pathname === '/create-post' ? classes.active : ''
+							location.pathname === '/create-article' ? classes.active : ''
 						}
 					>
 						Создать новость

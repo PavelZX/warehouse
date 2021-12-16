@@ -1,4 +1,4 @@
-.postList {
+.articleList {
 	display: grid;
 	width: 100%;
 	align-items: center;
@@ -8,7 +8,7 @@
 	margin-top: 3rem;
 }
 
-.postCard {
+.articleCard {
 	grid-column: 2 / -2;
 	display: grid;
 	background-color: var(--color-neutral-450);
@@ -17,53 +17,53 @@
 	border-radius: 20px;
 }
 
-.postHeader p {
+.articleHeader p {
 	margin-bottom: 1rem;
 	font-size: 1rem;
 }
 
-.postBody h4 {
+.articleBody h4 {
 	font-size: 1.5rem;
 	margin-bottom: 0.25rem;
 }
 
-.postBody h4 {
+.articleBody h4 {
 	font-size: 1.5rem;
 	margin-bottom: 0.25rem;
 }
 
-.postButtons {
+.articleButtons {
 	display: flex;
 	gap: 0.75rem;
 	font-size: 1.25rem;
 	align-items: center;
 }
 
-.postButtons button {
+.articleButtons button {
 	font-size: 1.25rem;
 	background-color: transparent;
 	border: none;
 	cursor: pointer;
 }
 
-.postButtons button * {
+.articleButtons button * {
 	pointer-events: none;
 }
 
 @media (min-width: 800px) {
-	.postCard {
+	.articleCard {
 		grid-template-columns: 3rem 1fr;
 	}
 
-	.postCard > * {
+	.articleCard > * {
 		grid-column: 2;
 	}
 
-	.postBody {
+	.articleBody {
 		grid-row: 2;
 	}
 
-	.postButtons {
+	.articleButtons {
 		grid-row: 1 / span 2;
 		grid-column: 1;
 		flex-direction: column;

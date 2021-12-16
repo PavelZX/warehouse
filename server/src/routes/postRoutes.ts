@@ -1,30 +1,30 @@
 import { NextFunction, Request, Response, Router } from 'express'
-import { PostController } from '../controllers/PostController'
+import { ArticleController } from '../controllers/ArticleController'
 import { isAuth } from '../middlewares/isAuth'
 
 const router = Router()
 
 router.get(
-	'/posts',
+	'/articles',
 	async (req: Request, res: Response, _next: NextFunction) => {
 		try {
 			const { cursor } = req.query
-			const posts = await PostController.getPosts(cursor)
-			return res.json(posts)
+			const articles = await ArticleController.getArticles(cursor)
+			return res.json(articles)
 		} catch (error) {
 			return res.json([])
 		}
 	}
 )
 
-router.post(
-	'/posts',
+router.article(
+	'/articles',
 	isAuth,
 	async (req: Request, res: Response, _next: NextFunction) => {
 		try {
 			const { userId: ownerId, title, text } = req.body
-			const post = await PostController.addPost({ ownerId, title, text })
-			return res.json(post)
+			const article = await ArticleController.addArticle({ ownerId, title, text })
+			return res.json(article)
 		} catch (error) {
 			return res.json(error)
 		}

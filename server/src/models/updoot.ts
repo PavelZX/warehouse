@@ -1,5 +1,5 @@
 import { sequelize } from './index'
-import { Post } from './post'
+import { Article } from './article'
 import { Good } from './good'
 import { Order } from './order'
 import { User } from './user'
@@ -9,7 +9,7 @@ interface UpdootAttributes {
 	id: string
 	value: number
 	userId: string
-	postId: string
+	articleId: string
 	goodId: string
 	orderId: string
 }
@@ -43,11 +43,11 @@ Updoot.init(
 				key: 'id',
 			},
 		},
-		postId: {
+		articleId: {
 			type: DataTypes.UUID,
 			allowNull: false,
 			references: {
-				model: Post,
+				model: Article,
 				key: 'id',
 			},
 		},

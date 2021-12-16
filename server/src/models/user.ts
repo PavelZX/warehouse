@@ -1,5 +1,5 @@
 import { sequelize } from './index'
-import { Post } from './post'
+import { Article } from './article'
 import {
 	Association,
 	DataTypes,
@@ -33,16 +33,16 @@ class User
 	public readonly createdAt!: Date
 	public readonly updatedAt!: Date
 
-	public getPosts!: HasManyGetAssociationsMixin<Post>
-	public addPost!: HasManyAddAssociationMixin<Post, number>
-	public hasPost!: HasManyHasAssociationMixin<Post, number>
-	public countPosts!: HasManyCountAssociationsMixin
-	public createPosts!: HasManyCreateAssociationMixin<Post>
+	public getArticles!: HasManyGetAssociationsMixin<Article>
+	public addArticle!: HasManyAddAssociationMixin<Article, number>
+	public hasArticle!: HasManyHasAssociationMixin<Article, number>
+	public countArticles!: HasManyCountAssociationsMixin
+	public createArticles!: HasManyCreateAssociationMixin<Article>
 
-	public readonly posts?: Post[]
+	public readonly articles?: Article[]
 
 	public static associations: {
-		posts: Association<User, Post>
+		articles: Association<User, Article>
 	}
 }
 

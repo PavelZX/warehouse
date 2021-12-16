@@ -1,55 +1,55 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { useOnScreen } from '../../hooks/useOnScreen'
-import { Post } from '../../interfaces/postInterface'
-import { postsRequest } from '../../utils/getPosts'
-import PostItem from './PostItem'
-import classes from '../../css/PostList.module.css'
+import { Article } from '../../interfaces/articleInterface'
+import { articlesRequest } from '../../utils/getArticles'
+import ArticleItem from './ArticleItem'
+import classes from '../../css/ArticleList.module.css'
 
-const PostList = () => {
-	const [posts, setPosts] = useState<Post[]>([])
+const ArticleList = () => {
+	const [articles, setArticles] = useState<Article[]>([])
 	const [hasMore, setHasMore] = useState(false)
 	const [isLoading, setIsLoading] = useState(true)
 	const pageBottom = useRef<any>()
 	const bottomVisible = useOnScreen(pageBottom)
 
-	const getPosts = () => {
+	const getArticles = () => {
 		setIsLoading(true)
-		postsRequest().then(({ posts, hasMore }) => {
-			setPosts(posts)
+		articlesRequest().then(({ articles, hasMore }) => {
+			setArticles(articles)
 			setHasMore(hasMore)
 			setIsLoading(false)
 		})
 	}
 
 	useEffect(() => {
-		getPosts()
+		getArticles()
 	}, [])
 
 	const loadMore = useCallback(async () => {
 		setIsLoading(true)
-		const [lastPost] = posts.slice(-1)
-		const lastPostDate = lastPost.createdAt
-		const { posts: newPosts, hasMore: newHasMore } = await postsRequest(
-			lastPostDate
+		const [lastArticle] = articles.slice(-1)
+		const lastArticleDate = lastArticle.createdAt
+		const { articles: newArticles, hasMore: newHasMore } = await articlesRequest(
+			lastArticleDate
 		)
-		setPosts(currentPosts => [...currentPosts, ...newPosts])
+		setArticles(currentArticles => [...currentArticles, ...newArticles])
 		setHasMore(newHasMore)
 		setIsLoading(false)
-	}, [posts])
+	}, [articles])
 
 	useEffect(() => {
 		if (isLoading || !hasMore) return
 		bottomVisible && loadMore()
 	}, [bottomVisible, hasMore, isLoading, loadMore])
 
-	const showPost = (post: Post) => <PostItem key={post.id} post={post} />
+	const showArticle = (article: Article) => <ArticleItem key={article.id} article={article} />
 
 	return (
-		<main className={classes.postList} style={{ paddingBottom: '3rem' }}>
-			{posts.length > 0 && posts.map(showPost)}
+		<main className={classes.articleList} style={{ paddingBottom: '3rem' }}>
+			{articles.length > 0 && articles.map(showArticle)}
 			<div ref={pageBottom} style={{ height: '1px' }} />
 		</main>
 	)
 }
 
-export default PostList
+export default ArticleList
