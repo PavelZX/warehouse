@@ -17,7 +17,7 @@ router.get(
 	}
 )
 
-router.order(
+router.post(
 	'/orders',
 	isAuth,
 	async (req: Request, res: Response, _next: NextFunction) => {

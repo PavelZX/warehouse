@@ -17,7 +17,7 @@ router.get(
 	}
 )
 
-router.good(
+router.post(
 	'/goods',
 	isAuth,
 	async (req: Request, res: Response, _next: NextFunction) => {

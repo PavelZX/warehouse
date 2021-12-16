@@ -17,7 +17,7 @@ router.get(
 	}
 )
 
-router.article(
+router.post(
 	'/articles',
 	isAuth,
 	async (req: Request, res: Response, _next: NextFunction) => {

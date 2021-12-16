@@ -12,7 +12,6 @@ export { sequelize }
 import { Article } from './article'
 import { Order } from './order'
 import { Good } from './good'
-import { Updoot } from './updoot'
 import { User } from './user'
 
 User.hasMany(Article, {
@@ -21,9 +20,9 @@ User.hasMany(Article, {
 	as: 'articles',
 	onDelete: 'CASCADE',
 })
-User.belongsToMany(Article, {
-	through: Updoot,
-	foreignKey: { allowNull: false, name: 'userId' },
+User.belongsToMany(Good, {
+	through: Order,
+	foreignKey: { allowNull: false, name: 'goodId' },
 	onDelete: 'CASCADE',
 })
 
@@ -31,9 +30,9 @@ Article.belongsTo(User, {
 	foreignKey: { name: 'ownerId' },
 	as: 'owner',
 })
-Article.belongsToMany(User, {
-	through: Updoot,
-	foreignKey: { allowNull: false, name: 'articleId' },
+Good.belongsToMany(User, {
+	through: Order,
+	foreignKey: { allowNull: false, name: 'goodId' },
 	onDelete: 'CASCADE',
 })
 
@@ -47,4 +46,4 @@ Good.belongsTo(Order, {
 	as: 'order'
 })
 
-export { Article, Good, Order, User, Updoot, Sequelize }
+export { Article, Good, Order, User, Sequelize }
