@@ -1,6 +1,6 @@
 import { useState, FormEventHandler } from 'react'
 import { Redirect } from 'react-router-dom'
-import { Form, Input, Textarea, Button } from '../'
+import { Form, Input, Textarea, Button } from '..'
 import { useForm } from '../../hooks/useForm'
 import { sendRequest } from '../../utils/sendRequest'
 import { useAuth } from '../../utils/UserContext'
