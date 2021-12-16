@@ -10,6 +10,8 @@ const sequelize = config.use_env_variable
 export { sequelize }
 
 import { Post } from './post'
+import { Order } from './order'
+import { Good } from './good'
 import { Updoot } from './updoot'
 import { User } from './user'
 
@@ -35,4 +37,14 @@ Post.belongsToMany(User, {
 	onDelete: 'CASCADE',
 })
 
-export { Post, User, Updoot, Sequelize }
+Order.hasMany(Good, {
+	foreignKey: 'orderId',
+	as: 'goods',
+})
+
+Good.belongsTo(Order, {
+	foreignKey: 'orderId',
+	as: 'order'
+})
+
+export { Post, Good, Order, User, Updoot, Sequelize }

@@ -1,7 +1,17 @@
 import { sequelize } from './index'
 import { User } from './user'
 import { Good } from './good'
-import { DataTypes, Model, Optional } from 'sequelize'
+import {
+	Association,
+	DataTypes,
+	HasManyAddAssociationMixin,
+	HasManyCountAssociationsMixin,
+	HasManyCreateAssociationMixin,
+	HasManyGetAssociationsMixin,
+	HasManyHasAssociationMixin,
+	Model,
+	Optional,
+} from 'sequelize'
 
 interface OrderAttributes {
 	id: string
@@ -23,6 +33,18 @@ class Order
 	public ownerId!: string
 	public readonly createdAt!: Date
 	public readonly updatedAt!: Date
+
+	public getGoods!: HasManyGetAssociationsMixin<Good>
+	public addGood!: HasManyAddAssociationMixin<Good, number>
+	public hasGood!: HasManyHasAssociationMixin<Good, number>
+	public countGoods!: HasManyCountAssociationsMixin
+	public createGoods!: HasManyCreateAssociationMixin<Good>
+
+	public readonly goods?: Good[]
+
+	public static associations: {
+		goods: Association<Order, Good>
+	}
 }
 
 Order.init(
@@ -60,15 +82,5 @@ Order.init(
 		modelName: 'Order',
 	}
 )
-
-Order.hasMany(Good, {
-	foreignKey: 'orderId',
-	as: "goods",
-})
-
-Good.belongsTo(Order, {
-	foreignKey: 'orderId',
-	as: 'order'
-})
 
 export { Order, OrderAttributes, OrderCreationAttributes }
